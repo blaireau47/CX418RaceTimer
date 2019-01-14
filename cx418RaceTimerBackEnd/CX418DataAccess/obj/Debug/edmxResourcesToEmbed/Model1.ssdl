@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="cx418timingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EventName" Type="nchar" MaxLength="250" Nullable="false" />
+    <Property Name="MultiRace" Type="bit" />
+    <Property Name="MultiDay" Type="bit" />
+    <Property Name="Location" Type="geography" />
+    <Property Name="StartDay" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="EndDay" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="LapTime">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bib" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="LapEndTime" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="RaceId" Type="int" Nullable="false" />
+    <Property Name="LapTime" Type="bigint" />
+    <Property Name="LapNumber" Type="int" />
+    <Property Name="CurrentRaceTime" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Race">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EventId" Type="int" Nullable="false" />
+    <Property Name="RaceStartingTime" Type="datetime2" Precision="7" />
+    <Property Name="RaceName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RaceStartedTime" Type="datetime2" Precision="7" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+    <Property Name="LapMax" Type="int" />
+    <Property Name="RaceLenght" Type="int" />
+  </EntityType>
+  <Function Name="sp_InsertLapTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BibId" Type="int" Mode="In" />
+    <Parameter Name="RaceId" Type="int" Mode="In" />
+    <Parameter Name="LapEndDateTime" Type="datetime2" Mode="In" />
+  </Function>
+  <EntityContainer Name="cx418timingModelStoreContainer">
+    <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LapTime" EntityType="Self.LapTime" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Race" EntityType="Self.Race" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

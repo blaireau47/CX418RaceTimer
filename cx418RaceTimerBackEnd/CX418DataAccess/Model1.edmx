@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="cx418timingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventName" Type="nchar" MaxLength="250" Nullable="false" />
+          <Property Name="MultiRace" Type="bit" />
+          <Property Name="MultiDay" Type="bit" />
+          <Property Name="Location" Type="geography" />
+          <Property Name="StartDay" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EndDay" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LapTime">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bib" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="LapEndTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="RaceId" Type="int" Nullable="false" />
+          <Property Name="LapTime" Type="bigint" />
+          <Property Name="LapNumber" Type="int" />
+          <Property Name="CurrentRaceTime" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Race">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="RaceStartingTime" Type="datetime2" Precision="7" />
+          <Property Name="RaceName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RaceStartedTime" Type="datetime2" Precision="7" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="LapMax" Type="int" />
+          <Property Name="RaceLenght" Type="int" />
+        </EntityType>
+        <Function Name="sp_InsertLapTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BibId" Type="int" Mode="In" />
+          <Parameter Name="RaceId" Type="int" Mode="In" />
+          <Parameter Name="LapEndDateTime" Type="datetime2" Mode="In" />
+        </Function>
+        <EntityContainer Name="cx418timingModelStoreContainer">
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LapTime" EntityType="Self.LapTime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Race" EntityType="Self.Race" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cx418timingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="cx418timingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LapTimes" EntityType="cx418timingModel.LapTime" />
+          <FunctionImport Name="sp_InsertLapTime">
+            <Parameter Name="BibId" Mode="In" Type="Int32" />
+            <Parameter Name="RaceId" Mode="In" Type="Int32" />
+            <Parameter Name="LapEndDateTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="Races" EntityType="cx418timingModel.Race" />
+          <EntitySet Name="Events" EntityType="cx418timingModel.Event" />
+        </EntityContainer>
+        <EntityType Name="LapTime">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bib" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="LapTime1" Type="Int32" />
+          <Property Name="RaceId" Type="Int32" Nullable="false" />
+          <Property Name="LapEndTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LapNumber" Type="Int32" />
+          <Property Name="CurrentRaceTime" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Race">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RaceStartingTime" Type="DateTime" Precision="7" />
+          <Property Name="RaceName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RaceStartedTime" Type="DateTime" Precision="7" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LapMax" Type="Int32" />
+          <Property Name="RaceLenght" Type="Int32" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventName" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="MultiRace" Type="Boolean" />
+          <Property Name="MultiDay" Type="Boolean" />
+          <Property Name="Location" Type="Geography" />
+          <Property Name="StartDay" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EndDay" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cx418timingModelStoreContainer" CdmEntityContainer="cx418timingEntities">
+          <EntitySetMapping Name="LapTimes">
+            <EntityTypeMapping TypeName="cx418timingModel.LapTime">
+              <MappingFragment StoreEntitySet="LapTime">
+                <ScalarProperty Name="CurrentRaceTime" ColumnName="CurrentRaceTime" />
+                <ScalarProperty Name="LapNumber" ColumnName="LapNumber" />
+                <ScalarProperty Name="LapEndTime" ColumnName="LapEndTime" />
+                <ScalarProperty Name="RaceId" ColumnName="RaceId" />
+                <ScalarProperty Name="LapTime1" ColumnName="LapTime" />
+                <ScalarProperty Name="bib" ColumnName="bib" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_InsertLapTime" FunctionName="cx418timingModel.Store.sp_InsertLapTime" />
+          <EntitySetMapping Name="Races">
+            <EntityTypeMapping TypeName="cx418timingModel.Race">
+              <MappingFragment StoreEntitySet="Race">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="RaceLenght" ColumnName="RaceLenght" />
+                <ScalarProperty Name="LapMax" ColumnName="LapMax" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RaceStartedTime" ColumnName="RaceStartedTime" />
+                <ScalarProperty Name="RaceName" ColumnName="RaceName" />
+                <ScalarProperty Name="RaceStartingTime" ColumnName="RaceStartingTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="cx418timingModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EndDay" ColumnName="EndDay" />
+                <ScalarProperty Name="StartDay" ColumnName="StartDay" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="MultiDay" ColumnName="MultiDay" />
+                <ScalarProperty Name="MultiRace" ColumnName="MultiRace" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

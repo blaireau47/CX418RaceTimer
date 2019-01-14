@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAZB4aySPPO0aJmPu8FxbNwgAAAAACAAAAAAAQZgAAAAEAACAAAABbR9P2RQlyTufJKBt2IZNMcvZI7q/fxTdV7y58JHQCsAAAAAAOgAAAAAIAACAAAADKooMW7NJmDJFKUD4T/JTFyApBkfYvehhbW/QUeTj9joAAAADw/nOa4aK5ZeYMNegP71iHb0DtajCdANTkd0+QGSeQ+9o5Be3p3wbdbe5TfvQoXUdS94tXMXegfuZOsfphYrceby7vWjuNnwiE8dwiBgsYGZ+w1SUALxk2wFtIHgEgN51Ozle/jikEZPC+7EJ15YHFOa/orBFaa8lsOawm+Oj5Z0AAAACKFO0ir7ktwDqJAilEWbLdqYH8e5/X7NQoOOay0Hr2SVL3BWwNx1R38XrhmkwLQhlDGiXlw05aniMl0u7dWDbs</EncryptedPassword>
+    <_PublishTargetUrl>ftp://ftp.gear.host/site/wwwroot/</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/CX418DataAccess.dll">
+      <publishTime>01/06/2019 15:21:37</publishTime>
+    </File>
+    <File Include="bin/CX418DataAccess.dll.config">
+      <publishTime>09/22/2018 11:40:12</publishTime>
+    </File>
+    <File Include="bin/CX418DataAccess.pdb">
+      <publishTime>01/06/2019 15:21:37</publishTime>
+    </File>
+    <File Include="bin/CX418RaceTimerREST.dll">
+      <publishTime>01/06/2019 15:21:38</publishTime>
+    </File>
+    <File Include="bin/CX418RaceTimerREST.pdb">
+      <publishTime>01/06/2019 15:21:38</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>10/23/2017 13:15:18</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>10/23/2017 13:15:20</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>07/05/2013 14:09:16</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>07/05/2013 14:09:16</publishTime>
+    </File>
+    <File Include="RaceTimer.svc">
+      <publishTime>09/23/2018 21:24:23</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>11/16/2018 13:34:42</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
